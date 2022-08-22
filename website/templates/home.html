@@ -1,0 +1,289 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly</title>
+  <script src="static/blockly-master/blockly_compressed.js"></script>
+  <script src="static/blockly-master/blocks_compressed.js"></script>
+  <script src="static/blockly-master/javascript_compressed.js"></script>
+  <script src="static/blockly-master/msg/js/en.js"></script>
+  <script src="block_exporter_tools.js"></script>
+  <script src="block_exporter_view.js"></script>
+  <script src="block_exporter_controller.js"></script>
+
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+
+    @media (max-width: 576px) { 
+      #blocklyDiv {
+                height: 350px;
+                width: 350px;
+            }
+      #blocklyCard {
+                height: 1500px;
+                width: 1800px;
+      }
+    }
+
+    @media (min-width: 576px) { 
+      #blocklyDiv {
+                height: 450px;
+                width: 350px;
+            }
+      #blocklyCard {
+                height: 1500px;
+                width: 1800px;
+      }
+    }
+
+    @media (min-width: 768px) { 
+      #blocklyDiv {
+                height: 650px;
+                width: 550px;
+            }
+      #blocklyCard {
+                height: 1500px;
+                width: 1800px;
+      }
+
+    }
+
+    @media (min-width: 992px) { 
+      #blocklyDiv {
+                height: 700px;
+                width: 750px;
+            }
+      #blocklyCard {
+                height: 1500px;
+                width: 1800px;
+      }
+
+    }
+
+    @media (min-width: 1200px) { 
+      #blocklyDiv {
+                height: 700px;
+                width: 950px;
+            }
+      #blocklyCard {
+                height: 1500px;
+                width: 1800px;
+      }
+
+    }
+
+    @media (min-width: 1400px) { 
+      #blocklyDiv {
+                height: 700px;
+                width: 1150px;
+            }
+      #blocklyCard {
+                height: 1500px;
+                width: 1800px;
+      }
+
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark border border-white">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+
+        <div class="me-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link fs-3 fw-bold text-white" href="/home">liteBlockly</a>
+            </div>
+        </div>
+
+        <div class="ms-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link border border-white rounded-3" href="/logout">Logout</a>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </nav>
+  
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto" id="blocklyCard">
+        <div class="card bg-light text-dark">
+          <div class="card-body">
+            <p>
+              <button class="btn-primary border-dark rounded-pill btn-out" onclick="showCode()">Show JavaScript</button>
+              <button class="btn-primary border-dark rounded-pill btn-out" onclick="runCode()">Run JavaScript</button>
+              <button class="btn-primary border-dark rounded-pill btn-out" onclick="DownloadJSON()">SAVE as JSON</button>
+            </p>
+              <div class="mx-auto" id="blocklyDiv"></div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  
+  
+  
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
+    <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+    </category>
+    <category name="Math" colour="%{BKY_MATH_HUE}">
+      <block type="math_number">
+        <field name="NUM">123</field>
+      </block>
+      <block type="math_arithmetic"></block>
+      <block type="math_single"></block>
+    </category>
+    <category name="Text" colour="%{BKY_TEXTS_HUE}">
+      <block type="text"></block>
+      <block type="text_length"></block>
+      <block type="text_print"></block>
+    </category>
+  </xml>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
+    <block type="controls_if" inline="false" x="20" y="20">
+      <mutation else="1"></mutation>
+      <value name="IF0">
+        <block type="logic_compare" inline="true">
+          <field name="OP">EQ</field>
+          <value name="A">
+            <block type="math_arithmetic" inline="true">
+              <field name="OP">MULTIPLY</field>
+              <value name="A">
+                <block type="math_number">
+                  <field name="NUM">6</field>
+                </block>
+              </value>
+              <value name="B">
+                <block type="math_number">
+                  <field name="NUM">7</field>
+                </block>
+              </value>
+            </block>
+          </value>
+          <value name="B">
+            <block type="math_number">
+              <field name="NUM">42</field>
+            </block>
+          </value>
+        </block>
+      </value>
+      <statement name="DO0">
+        <block type="text_print" inline="false">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT">Don't panic</field>
+            </block>
+          </value>
+        </block>
+      </statement>
+      <statement name="ELSE">
+        <block type="text_print" inline="false">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT">Panic</field>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </xml>
+
+  <script>
+    var demoWorkspace = Blockly.inject('blocklyDiv',
+        {media: '../../media/',
+         toolbox: document.getElementById('toolbox')});
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+                               demoWorkspace);
+
+    function showCode() {
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+      alert(code);
+    }
+
+    function downloadCode() {
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+      alert(code);
+    }
+
+    function DownloadJSON() {
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      
+        var json = Blockly.serialization.workspaces.save(workspace);
+ 
+        json = [json];
+        var blob1 = new Blob(json, { type: "text/plain;charset=utf-8" });
+ 
+        var isIE = false || !!document.documentMode;
+        if (isIE) {
+            window.navigator.msSaveBlob(blob1, "Blockly JSON.txt");
+        } else {
+            var url = window.URL || window.webkitURL;
+            link = url.createObjectURL(blob1);
+            var a = document.createElement("a");
+            a.download = "Blockly JSON.txt";
+            a.href = link;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    }
+
+    function runCode() {
+      window.LoopTrap = 1000;
+      Blockly.JavaScript.INFINITE_LOOP_TRAP =
+          'if (--window.LoopTrap === 0) throw "Infinite loop.";\n';
+      var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      try {
+        eval(code);
+      } catch (e) {
+        alert(e);
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+{% endblock %}

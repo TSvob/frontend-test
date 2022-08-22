@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block title %}Notes{% endblock %} {% block content%}
+<nav class="navbar navbar-expand-md navbar-dark border border-white">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+
+        <div class="me-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link fs-3 fw-bold text-white" href="/home">liteBlockly</a>
+            </div>
+        </div>
+
+        <div class="ms-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link border border-white rounded-3" href="/logout">Logout</a>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="col-sm-8 mx-auto">
+    <div class="card bg-light">
+        <div class="card-body">
+            <h2>TITLE HEADING</h2>
+            <h5>Title description, Dec 7, 2020</h5>
+            <p>Some text..</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        
+            <h2 class="mt-5">TITLE HEADING</h2>
+            <h5>Title description, Sep 2, 2020</h5>
+            <p>Some text..</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        </div>
+    </div>
+    
+  </div>
+{% endblock %}
