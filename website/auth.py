@@ -11,7 +11,7 @@ import smtplib
 auth = Blueprint("auth", __name__)
 
 
-
+@auth.route("/")
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
     #only taking info if submitting
