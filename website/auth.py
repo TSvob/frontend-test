@@ -7,6 +7,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .password_gen import new_password_generator
 import smtplib 
+import re
 
 auth = Blueprint("auth", __name__)
 
@@ -53,6 +54,10 @@ def sign_up():
             flash('Password don\'t match!', category='error')
         elif len(username) < 2:
             flash('Username is too short.', category='error')
+        elif password1.lower() == password1:
+            flash('Password must contain lower and upper letters!', category='error')
+        elif password1.upper() == password1:
+            flash('Password must contain lower and upper letters!', category='error')
         elif len(password1) < 6:
             flash('Password is too short.', category='error')
         elif len(email) < 4:
